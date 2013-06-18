@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Websocket-client by liris</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Websocket-client</h1>
+        <p>websocket client for python</p>
+        <p class="view"><a href="https://github.com/liris/websocket-client">View the Project on GitHub <small>liris/websocket-client</small></a></p>
+        <ul>
+          <li><a href="https://github.com/liris/websocket-client/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/liris/websocket-client/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/liris/websocket-client">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1></h1>
+
+<h1>
+<a name="websocket-client" class="anchor" href="#websocket-client"><span class="octicon octicon-link"></span></a>websocket-client</h1>
+
+<p>websocket-client module  is WebSocket client for python. This provide the low level APIs for WebSocket. All APIs are the synchronous functions.</p>
+
+<p>websocket-client supports only hybi-13.</p>
+
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<ul>
+<li>LGPL</li>
+</ul><h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>This module is tested on only Python 2.7.</p>
+
+<p>Type "python setup.py install" or "pip install websocket-client" to install.</p>
+
+<p>This module does not depend on any other module.</p>
+
+<h1>
+<a name="how-about-python-3" class="anchor" href="#how-about-python-3"><span class="octicon octicon-link"></span></a>How about Python 3</h1>
+
+<p>py3( <a href="https://github.com/liris/websocket-client/tree/py3">https://github.com/liris/websocket-client/tree/py3</a> ) branch is for python 3.3. Every test case is passed.
+If you are using python3, please check it.</p>
+
+<h1>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h1>
+
+<p>Low Level API example::</p>
+
+<pre><code>from websocket import create_connection
+ws = create_connection("ws://echo.websocket.org/")
+print "Sending 'Hello, World'..."
+ws.send("Hello, World")
+print "Sent"
+print "Reeiving..."
+result =  ws.recv()
+print "Received '%s'" % result
+ws.close()
+</code></pre>
+
+<p>If you want to customize socket options, set sockopt.</p>
+
+<p>sockopt example:</p>
+
+<pre><code>from websocket import create_connection
+ws = create_connection("ws://echo.websocket.org/".
+                        sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY),) )
+</code></pre>
+
+<p>JavaScript websocket-like API example::</p>
+
+<p>import websocket
+  import thread
+  import time</p>
+
+<p>def on_message(ws, message):
+      print message</p>
+
+<p>def on_error(ws, error):
+      print error</p>
+
+<p>def on_close(ws):
+      print "### closed ###"</p>
+
+<p>def on_open(ws):
+      def run(*args):
+          for i in range(3):
+              time.sleep(1)
+              ws.send("Hello %d" % i)
+          time.sleep(1)
+          ws.close()
+          print "thread terminating..."
+      thread.start_new_thread(run, ())</p>
+
+<p>if <strong>name</strong> == "__main__":
+      websocket.enableTrace(True)
+      ws = websocket.WebSocketApp("ws://echo.websocket.org/",
+                                  on_message = on_message,
+                                  on_error = on_error,
+                                  on_close = on_close)
+      ws.on_open = on_open</p>
+
+<pre><code>  ws.run_forever()
+</code></pre>
+
+<h1>
+<a name="wsdumppy" class="anchor" href="#wsdumppy"><span class="octicon octicon-link"></span></a>wsdump.py</h1>
+
+<p>wsdump.py is simple WebSocket test(debug) tool.</p>
+
+<p>sample for echo.websocket.org::</p>
+
+<p>$ wsdump.py ws://echo.websocket.org/
+  Press Ctrl+C to quit</p>
+
+<blockquote>
+<p>Hello, WebSocket
+  &lt; Hello, WebSocket
+How are you?
+  &lt; How are you?</p>
+</blockquote>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>usage::
+  wsdump.py [-h] [-v [VERBOSE]] ws_url</p>
+
+<p>WebSocket Simple Dump Tool</p>
+
+<p>positional arguments:
+  ws_url                websocket url. ex. ws://echo.websocket.org/</p>
+
+<p>optional arguments:
+  -h, --help                           show this help message and exit</p>
+
+<p>-v VERBOSE, --verbose VERBOSE    set verbose mode. If set to 1, show opcode. If set to 2, enable to trace websocket module</p>
+
+<p>example::</p>
+
+<p>$ wsdump.py ws://echo.websocket.org/
+  $ wsdump.py ws://echo.websocket.org/ -v
+  $ wsdump.py ws://echo.websocket.org/ -vv</p>
+
+<h1>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h1>
+
+<ul>
+<li>
+<p>v0.11.0</p>
+
+<ul>
+<li>Only log non-normal close status(ISSUE#31)</li>
+<li>Fix default Origin isn't URI(ISSUE#32)</li>
+<li>fileno support(ISSUE#33)</li>
+</ul>
+</li>
+<li>
+<p>v0.10.0</p>
+
+<ul>
+<li>allow to set HTTP Header to WebSocketApp(ISSUE#27)</li>
+<li>fix typo in pydoc(ISSUE#28)</li>
+<li>Passing a socketopt flag to the websocket constructor(ISSUE#29)</li>
+<li>websocket.send fails with long data(ISSUE#30)</li>
+</ul>
+</li>
+<li>
+<p>v0.9.0</p>
+
+<ul>
+<li>allow to set opcode in WebSocketApp.send(ISSUE#25)</li>
+<li>allow to modify Origin(ISSUE#26)</li>
+</ul>
+</li>
+<li>
+<p>v0.8.0</p>
+
+<ul>
+<li>many bug fix</li>
+<li>some performance improvement</li>
+</ul>
+</li>
+<li>
+<p>v0.7.0</p>
+
+<ul>
+<li>fixed problem to read long data.(ISSUE#12)</li>
+<li>fix buffer size boundary violation</li>
+</ul>
+</li>
+<li>
+<p>v0.6.0</p>
+
+<ul>
+<li>Patches: UUID4, self.keep_running, mask_key (ISSUE#11)</li>
+<li>add wsdump.py tool </li>
+</ul>
+</li>
+<li>
+<p>v0.5.2</p>
+
+<ul>
+<li>fix Echo App Demo Throw Error: 'NoneType' object has no attribute 'opcode  (ISSUE#10)</li>
+</ul>
+</li>
+<li>
+<p>v0.5.1</p>
+
+<ul>
+<li>delete invalid print statement.</li>
+</ul>
+</li>
+<li>
+<p>v0.5.0</p>
+
+<ul>
+<li>support hybi-13 protocol.</li>
+</ul>
+</li>
+<li>
+<p>v0.4.1</p>
+
+<ul>
+<li>fix incorrect custom header order(ISSUE#1)</li>
+</ul>
+</li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/liris">liris</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
