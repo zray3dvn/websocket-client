@@ -1,33 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Websocket-client by liris</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <title>Websocket-client by liris</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Websocket-client</h1>
-        <p>websocket client for python</p>
-        <p class="view"><a href="https://github.com/liris/websocket-client">View the Project on GitHub <small>liris/websocket-client</small></a></p>
-        <ul>
-          <li><a href="https://github.com/liris/websocket-client/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/liris/websocket-client/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/liris/websocket-client">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1></h1>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Websocket-client</h1>
+          <h2>websocket client for python</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/liris/websocket-client/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/liris/websocket-client/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/liris/websocket-client" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1></h1>
 
 <h1>
 <a name="websocket-client" class="anchor" href="#websocket-client"><span class="octicon octicon-link"></span></a>websocket-client</h1>
@@ -37,6 +41,18 @@
 <p>websocket-client supports only hybi-13.</p>
 
 <h1>
+<a name="caution" class="anchor" href="#caution"><span class="octicon octicon-link"></span></a>CAUTION</h1>
+
+<p>We have a big change on version 0.14.0.
+So, please test on trunk repository.</p>
+
+<h1>
+<a name="v014-release-schedule" class="anchor" href="#v014-release-schedule"><span class="octicon octicon-link"></span></a>v0.14 release schedule</h1>
+
+<p>Now, under testing.
+v0.14 will be released on May 15.</p>
+
+<h1>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
 
 <ul>
@@ -44,17 +60,28 @@
 </ul><h1>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
 
-<p>This module is tested on only Python 2.7.</p>
+<p>This module is tested on Python 2.7 and Python 3.x.</p>
 
 <p>Type "python setup.py install" or "pip install websocket-client" to install.</p>
 
-<p>This module does not depend on any other module.</p>
+<p>This module depend on</p>
 
-<h1>
+<ul>
+<li>six</li>
+<li>backports.ssl_match_hostname for Python 2.x</li>
+</ul><h1>
 <a name="how-about-python-3" class="anchor" href="#how-about-python-3"><span class="octicon octicon-link"></span></a>How about Python 3</h1>
 
-<p>py3( <a href="https://github.com/liris/websocket-client/tree/py3">https://github.com/liris/websocket-client/tree/py3</a> ) branch is for python 3.3. Every test case is passed.
-If you are using python3, please check it.</p>
+<p>Now, we support python 3 on  single source code from version 0.14.0. Thanks, <a href="https://github.com/battlemidget" class="user-mention">@battlemidget</a> and <a href="https://github.com/ralphbean" class="user-mention">@ralphbean</a>.</p>
+
+<h1>
+<a name="http-proxy" class="anchor" href="#http-proxy"><span class="octicon octicon-link"></span></a>HTTP Proxy</h1>
+
+<p>Support websocket access via http proxy.
+The proxy server must allow "CONNECT" method to websocket port.
+Default squid setting is "ALLOWED TO CONNECT ONLY HTTPS PORT".</p>
+
+<p>Current implementation of websocket-client is using "CONNECT" method via proxy.</p>
 
 <h1>
 <a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h1>
@@ -106,7 +133,7 @@ ws = create_connection("ws://echo.websocket.org/".
           print "thread terminating..."
       thread.start_new_thread(run, ())</p>
 
-<p>if <strong>name</strong> == "__main__":
+<p>if <strong>name</strong> == "<strong>main</strong>":
       websocket.enableTrace(True)
       ws = websocket.WebSocketApp("ws://echo.websocket.org/",
                                   on_message = on_message,
@@ -146,9 +173,9 @@ How are you?
   ws_url                websocket url. ex. ws://echo.websocket.org/</p>
 
 <p>optional arguments:
-  -h, --help                           show this help message and exit</p>
-
-<p>-v VERBOSE, --verbose VERBOSE    set verbose mode. If set to 1, show opcode. If set to 2, enable to trace websocket module</p>
+  -h, --help                           show this help message and exit
+WebSocketApp
+  -v VERBOSE, --verbose VERBOSE    set verbose mode. If set to 1, show opcode. If set to 2, enable to trace websocket module</p>
 
 <p>example::</p>
 
@@ -160,6 +187,43 @@ How are you?
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h1>
 
 <ul>
+<li>
+<p>v0.14.0</p>
+
+<ul>
+<li>Support python 3(#73)</li>
+<li>Support IPv6(#77)</li>
+<li>Support explicit web proxy(#57)</li>
+</ul>
+</li>
+<li>
+<p>v0.13.0</p>
+
+<ul>
+<li>MemoryError when receiving large amount of data (~60 MB) at once(ISSUE#59)</li>
+<li>Controlling fragmentation(ISSUE#55)</li>
+<li>server certificate validation(ISSUE#56)</li>
+<li>PyPI tarball is missing test_websocket.py(ISSUE#65)</li>
+<li>Payload length encoding bug(ISSUE#58)</li>
+<li>disable Nagle algorithm by default(ISSUE#41)</li>
+<li>Better event loop in WebSocketApp(ISSUE#63)</li>
+<li>Skip tests that require Internet access by default(ISSUE#66)</li>
+</ul>
+</li>
+<li>
+<p>v0.12.0</p>
+
+<ul>
+<li>support keep alive for WebSocketApp(ISSUE#34)</li>
+<li>fix some SSL bugs(ISSUE#35, #36)</li>
+<li>fix "Timing out leaves websocket library in bad state"(ISSUE#37)</li>
+<li>fix "WebSocketApp.run_with_no_err() silently eats all exceptions"(ISSUE#38)</li>
+<li>WebSocketTimeoutException will be raised for ws/wss timeout(ISSUE#40)</li>
+<li>improve wsdump message(ISSUE#42)</li>
+<li>support fragmentation message(ISSUE#43)</li>
+<li>fix some bugs</li>
+</ul>
+</li>
 <li>
 <p>v0.11.0</p>
 
@@ -208,7 +272,7 @@ How are you?
 
 <ul>
 <li>Patches: UUID4, self.keep_running, mask_key (ISSUE#11)</li>
-<li>add wsdump.py tool </li>
+<li>add wsdump.py tool</li>
 </ul>
 </li>
 <li>
@@ -240,13 +304,15 @@ How are you?
 </ul>
 </li>
 </ul>
-      </section>
+        </section>
+
+        <footer>
+          Websocket-client is maintained by <a href="https://github.com/liris">liris</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/liris">liris</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
   </body>
 </html>
