@@ -88,60 +88,60 @@ Default squid setting is "ALLOWED TO CONNECT ONLY HTTPS PORT".</p>
 
 <p>Low Level API example::</p>
 
-<pre><code>from websocket import create_connection
-ws = create_connection("ws://echo.websocket.org/")
-print "Sending 'Hello, World'..."
-ws.send("Hello, World")
-print "Sent"
-print "Reeiving..."
-result =  ws.recv()
-print "Received '%s'" % result
-ws.close()
+<pre><code>    from websocket import create_connection
+    ws = create_connection("ws://echo.websocket.org/")
+    print "Sending 'Hello, World'..."
+    ws.send("Hello, World")
+    print "Sent"
+    print "Reeiving..."
+    result =  ws.recv()
+    print "Received '%s'" % result
+    ws.close()
 </code></pre>
 
 <p>If you want to customize socket options, set sockopt.</p>
 
 <p>sockopt example:</p>
 
-<pre><code>from websocket import create_connection
-ws = create_connection("ws://echo.websocket.org/".
-                        sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY),) )
+<pre><code>    from websocket import create_connection
+    ws = create_connection("ws://echo.websocket.org/".
+                            sockopt=((socket.IPPROTO_TCP, socket.TCP_NODELAY),) )
 </code></pre>
 
 <p>JavaScript websocket-like API example::</p>
 
-<pre><code>import websocket
-import thread
-import time
+<pre><code>    import websocket
+    import thread
+    import time
 
-def on_message(ws, message):
-    print message
+    def on_message(ws, message):
+        print message
 
-def on_error(ws, error):
-    print error
+    def on_error(ws, error):
+        print error
 
-def on_close(ws):
-    print "### closed ###"
+    def on_close(ws):
+        print "### closed ###"
 
-def on_open(ws):
-    def run(*args):
-        for i in range(3):
+    def on_open(ws):
+        def run(*args):
+            for i in range(3):
+                time.sleep(1)
+                ws.send("Hello %d" % i)
             time.sleep(1)
-            ws.send("Hello %d" % i)
-        time.sleep(1)
-        ws.close()
-        print "thread terminating..."
-    thread.start_new_thread(run, ())
+            ws.close()
+            print "thread terminating..."
+        thread.start_new_thread(run, ())
 
 
-if __name__ == "__main__":
-    websocket.enableTrace(True)
-    ws = websocket.WebSocketApp("ws://echo.websocket.org/",
-                              on_message = on_message,
-                              on_error = on_error,
-                              on_close = on_close)
-    ws.on_open = on_open
-    ws.run_forever()
+    if __name__ == "__main__":
+        websocket.enableTrace(True)
+        ws = websocket.WebSocketApp("ws://echo.websocket.org/",
+                                  on_message = on_message,
+                                  on_error = on_error,
+                                  on_close = on_close)
+        ws.on_open = on_open
+        ws.run_forever()
 </code></pre>
 
 <h1>
@@ -151,37 +151,38 @@ if __name__ == "__main__":
 
 <p>sample for echo.websocket.org::</p>
 
-<p>$ wsdump.py ws://echo.websocket.org/
-  Press Ctrl+C to quit</p>
-
-<blockquote>
-<p>Hello, WebSocket
+<pre><code>  $ wsdump.py ws://echo.websocket.org/
+  Press Ctrl+C to quit
+  &gt; Hello, WebSocket
   &lt; Hello, WebSocket
-How are you?
-  &lt; How are you?</p>
-</blockquote>
+  &gt; How are you?
+  &lt; How are you?
+</code></pre>
 
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>usage::
-  wsdump.py [-h] [-v [VERBOSE]] ws_url</p>
+<pre><code>usage::
 
-<p>WebSocket Simple Dump Tool</p>
+  wsdump.py [-h] [-v [VERBOSE]] ws_url
 
-<p>positional arguments:
-  ws_url                websocket url. ex. ws://echo.websocket.org/</p>
+WebSocket Simple Dump Tool
 
-<p>optional arguments:
+positional arguments:
+  ws_url                websocket url. ex. ws://echo.websocket.org/
+
+optional arguments:
   -h, --help                           show this help message and exit
 WebSocketApp
-  -v VERBOSE, --verbose VERBOSE    set verbose mode. If set to 1, show opcode. If set to 2, enable to trace websocket module</p>
+  -v VERBOSE, --verbose VERBOSE    set verbose mode. If set to 1, show opcode. If set to 2, enable to trace websocket module
+</code></pre>
 
 <p>example::</p>
 
-<p>$ wsdump.py ws://echo.websocket.org/
+<pre><code>  $ wsdump.py ws://echo.websocket.org/
   $ wsdump.py ws://echo.websocket.org/ -v
-  $ wsdump.py ws://echo.websocket.org/ -vv</p>
+  $ wsdump.py ws://echo.websocket.org/ -vv
+</code></pre>
 
 <h1>
 <a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>ChangeLog</h1>
